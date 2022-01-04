@@ -18,13 +18,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  //String _email = 'AVASILE';
-  String _email = '';
+  String _email = 'test';
   String _emailError = '';
   bool _emailShowError = false;
 
-  //String _password = 'AVA123';
-  String _password = '';
+  String _password = 'test';
   String _passwordError = '';
   bool _passwordShowError = false;
 
@@ -37,72 +35,99 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff8c8c94),
-      body: Stack(
-        children: <Widget>[
-          Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 0),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xff242424),
-                    Color(0xff8c8c94),
-                  ],
+      backgroundColor: Color(0xffffffff),
+      body: Padding(
+        padding: EdgeInsets.all(0),
+        child: Stack(
+          children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
+            Column(
+              children: [
+                Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 0),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color(0xffffffff),
+                          Color(0xffffffff),
+                        ],
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20, top: 20, right: 20, bottom: 0),
+                      child: Image.asset(
+                        "assets/logo.png",
+                        height: 200,
+                      ),
+                    )),
+                Container(
+                  child: Text(Constants.version,
+                      style: TextStyle(
+                        color: Color(0xFF0e4888),
+                        fontSize: 16,
+                      )),
                 ),
-              ),
-              child: Image.asset(
-                "assets/logo.png",
-                height: 200,
-              )),
-          Transform.translate(
-            offset: Offset(0, -60),
-            child: Center(
-              child: SingleChildScrollView(
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  elevation: 15,
-                  margin: EdgeInsets.only(
-                      left: 20, right: 20, top: 260, bottom: 20),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 35, vertical: 20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        _showEmail(),
-                        _showPassword(),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        _showRememberme(),
-                        _showButtons(),
-                      ],
+                Divider(
+                  height: 5,
+                  color: Color(0xFF0e4888),
+                ),
+              ],
+            ),
+            Transform.translate(
+              offset: Offset(0, -60),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    elevation: 15,
+                    color: Colors.grey[400],
+                    margin: EdgeInsets.only(
+                        left: 20, right: 20, top: 260, bottom: 20),
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 35, vertical: 20),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          _showEmail(),
+                          _showPassword(),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          _showRememberme(),
+                          _showButtons(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(
-                  height: 40,
-                ),
-              ],
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: 40,
+                  ),
+                ],
+              ),
             ),
-          ),
-          _showLoader
-              ? LoaderComponent(
-                  text: 'Por favor espere...',
-                )
-              : Container(),
-        ],
+            _showLoader
+                ? LoaderComponent(
+                    text: 'Por favor espere...',
+                  )
+                : Container(),
+          ],
+        ),
       ),
     );
   }
@@ -197,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
               style: ElevatedButton.styleFrom(
-                primary: Color(0xFF781f1e),
+                primary: Color(0xFF0e4888),
                 minimumSize: Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
@@ -242,8 +267,9 @@ class _LoginScreenState extends State<LoginScreen> {
     if (response.statusCode >= 400) {
       setState(() {
         _passwordShowError = true;
-        _passwordError = 'Email o contraseña incorrectos';
+        _passwordError = 'Usuario o contraseña incorrectos';
       });
+      _showLoader = false;
       return;
     }
 
@@ -260,14 +286,14 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    // if (user.habilitaAPP != 1) {
-    //   setState(() {
-    //     _showLoader = false;
-    //     _passwordShowError = true;
-    //     _passwordError = 'Usuario no habilitado';
-    //   });
-    //   return;
-    // }
+    if (user.habilitadoWeb != 1) {
+      setState(() {
+        _showLoader = false;
+        _passwordShowError = true;
+        _passwordError = 'Usuario no habilitado';
+      });
+      return;
+    }
 
     if (_rememberme) {
       _storeUser(body);
@@ -300,10 +326,10 @@ class _LoginScreenState extends State<LoginScreen> {
       isValid = false;
       _passwordShowError = true;
       _passwordError = 'Debes ingresar tu Contraseña';
-    } else if (_password.length < 6) {
+    } else if (_password.length < 3) {
       isValid = false;
       _passwordShowError = true;
-      _passwordError = 'La Contraseña debe tener al menos 6 caracteres';
+      _passwordError = 'La Contraseña debe tener al menos 2 caracteres';
     } else {
       _passwordShowError = false;
     }

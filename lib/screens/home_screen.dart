@@ -17,7 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rowing App'),
+        title: Text('Fleet App'),
+        backgroundColor: Color(0xFF0e4888),
+        centerTitle: true,
       ),
       body: _getBody(),
       drawer: _getMenu(),
@@ -33,25 +35,28 @@ class _HomeScreenState extends State<HomeScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xff242424),
-              Color(0xff8c8c94),
+              Color(0xffFFFFFF),
+              Color(0xffFFFFFF),
             ],
           ),
         ),
-        child: Column(
-          children: [
-            Image.asset(
-              "assets/logo.png",
-              height: 200,
-            ),
-            Text(
-              'Bienvenido/a ${widget.user.apellidonombre}',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-          ],
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Image.asset(
+                "assets/logo.png",
+                height: 200,
+              ),
+              Text(
+                'Bienvenido/a ${widget.user.apellidonombre}',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF0e4888)),
+              ),
+            ],
+          ),
         ));
   }
 
@@ -63,8 +68,8 @@ class _HomeScreenState extends State<HomeScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xff8c8c94),
-              Color(0xff8c8c94),
+              Color(0xffffffff),
+              Color(0xff88a3be),
             ],
           ),
         ),
@@ -76,8 +81,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color(0xff242424),
-                    Color(0xff8c8c94),
+                    Color(0xffffffff),
+                    Color(0xffffffff),
                   ],
                 ),
               ),
@@ -91,18 +96,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: 200,
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   Row(
                     children: [
                       Text(
                         "Usuario: ",
                         style: (TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold)),
+                            color: Color(0xff0e4888),
+                            fontWeight: FontWeight.bold)),
                       ),
                       Text(
                         widget.user.apellidonombre!,
-                        style: (TextStyle(color: Colors.white)),
+                        style: (TextStyle(color: Colors.black)),
                       ),
                     ],
                   ),
@@ -110,27 +116,31 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Divider(
-              color: Colors.white,
+              color: Color(0xff0e4888),
               height: 1,
             ),
             ListTile(
               leading: Icon(
-                Icons.home,
-                color: Colors.white,
+                Icons.settings_remote,
+                color: Color(0xff0e4888),
               ),
-              title: Text('Inicio',
-                  style: TextStyle(fontSize: 15, color: Colors.white)),
-              tileColor: Color(0xff8c8c94),
+              title: Text('Controles Remotos',
+                  style: TextStyle(fontSize: 15, color: Color(0xff0e4888))),
+              tileColor: Color(0xff0e4888),
               onTap: () {},
+            ),
+            Divider(
+              color: Color(0xff0e4888),
+              height: 1,
             ),
             ListTile(
               leading: Icon(
-                Icons.construction,
-                color: Colors.white,
+                Icons.router,
+                color: Color(0xff0e4888),
               ),
-              title: Text('Obras',
-                  style: TextStyle(fontSize: 15, color: Colors.white)),
-              tileColor: Color(0xff8c8c94),
+              title: Text('Recuperos Prisma',
+                  style: TextStyle(fontSize: 15, color: Color(0xff0e4888))),
+              tileColor: Color(0xff0e4888),
               onTap: () {
                 // Navigator.push(
                 //     context,
@@ -140,26 +150,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 //             )));
               },
             ),
+            Divider(
+              color: Color(0xff0e4888),
+              height: 1,
+            ),
             ListTile(
               leading: Icon(
-                Icons.handyman,
-                color: Colors.white,
+                Icons.router,
+                color: Color(0xff0e4888),
               ),
-              title: Text('Medidores',
-                  style: TextStyle(fontSize: 15, color: Colors.white)),
+              title: Text('Recuperos Cablevisión',
+                  style: TextStyle(fontSize: 15, color: Color(0xff0e4888))),
               tileColor: Color(0xff8c8c94),
               onTap: () {
                 // Navigator.push(context,
                 //     MaterialPageRoute(builder: (context) => MedidoresScreen()));
               },
             ),
+            Divider(
+              color: Color(0xff0e4888),
+              height: 1,
+            ),
             ListTile(
               leading: Icon(
-                Icons.engineering,
-                color: Colors.white,
+                Icons.satellite,
+                color: Color(0xff0e4888),
               ),
-              title: Text('Seguridad e Higiene',
-                  style: TextStyle(fontSize: 15, color: Colors.white)),
+              title: Text('Recuperos DTV',
+                  style: TextStyle(fontSize: 15, color: Color(0xff0e4888))),
               tileColor: Color(0xff8c8c94),
               onTap: () {
                 // Navigator.push(context,
@@ -167,17 +185,102 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             Divider(
-              color: Colors.white,
+              color: Color(0xff0e4888),
+              height: 1,
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.settings_input_antenna,
+                color: Color(0xff0e4888),
+              ),
+              title: Text('Recuperos Tasa',
+                  style: TextStyle(fontSize: 15, color: Color(0xff0e4888))),
+              tileColor: Color(0xff8c8c94),
+              onTap: () {
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => SeguridadScreen()));
+              },
+            ),
+            Divider(
+              color: Color(0xff0e4888),
+              height: 1,
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.title,
+                color: Color(0xff0e4888),
+              ),
+              title: Text('Recuperos TLC',
+                  style: TextStyle(fontSize: 15, color: Color(0xff0e4888))),
+              tileColor: Color(0xff8c8c94),
+              onTap: () {
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => SeguridadScreen()));
+              },
+            ),
+            Divider(
+              color: Color(0xff0e4888),
+              height: 1,
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.map,
+                color: Color(0xff0e4888),
+              ),
+              title: Text('Mapa',
+                  style: TextStyle(fontSize: 15, color: Color(0xff0e4888))),
+              tileColor: Color(0xff8c8c94),
+              onTap: () {
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => SeguridadScreen()));
+              },
+            ),
+            Divider(
+              color: Color(0xff0e4888),
+              height: 1,
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.equalizer,
+                color: Color(0xff0e4888),
+              ),
+              title: Text('Estadísticas',
+                  style: TextStyle(fontSize: 15, color: Color(0xff0e4888))),
+              tileColor: Color(0xff8c8c94),
+              onTap: () {
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => SeguridadScreen()));
+              },
+            ),
+            Divider(
+              color: Color(0xff0e4888),
+              height: 1,
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.contact_page,
+                color: Color(0xff0e4888),
+              ),
+              title: Text('Contacto',
+                  style: TextStyle(fontSize: 15, color: Color(0xff0e4888))),
+              tileColor: Color(0xff8c8c94),
+              onTap: () {
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => SeguridadScreen()));
+              },
+            ),
+            Divider(
+              color: Color(0xff0e4888),
               height: 1,
             ),
             ListTile(
               leading: Icon(
                 Icons.logout,
-                color: Colors.white,
+                color: Color(0xff0e4888),
               ),
               tileColor: Color(0xff8c8c94),
               title: Text('Cerrar Sesión',
-                  style: TextStyle(fontSize: 15, color: Colors.white)),
+                  style: TextStyle(fontSize: 15, color: Color(0xff0e4888))),
               onTap: () {
                 _logOut();
               },
